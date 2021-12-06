@@ -51,4 +51,19 @@ export default {
   width: 200px;
   text-align: center;
 }
+
+@media(max-width: 480px) {
+  .title {
+    margin-top: 100px;
+    font-size: 25px;
+  }
+
+  .text {
+    font-size: 15px;
+  }
+  
+  .btn-options button {
+    font-size: 15px;
+  }
+}
 </style>

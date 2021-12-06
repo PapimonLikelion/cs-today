@@ -19,4 +19,10 @@ export default {
   width: 200px;
   text-align: center;
 }
+
+@media(max-width: 480px) {
+  .btn-return {
+    font-size: 15px;
+  }
+}
 </style>

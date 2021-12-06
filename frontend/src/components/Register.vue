@@ -27,7 +27,7 @@
     <div class="registerd" v-if="register">
       <h4 class="mb-4">🎉 감사합니다 🎉</h4>
       <p class="text">{{this.email}}로 {{this.days}}일마다 보내드릴게요!</p>
-      <button type="button" class="btn-return btn btn-primary register-btn" @click="$router.push('/')">메인페이지로 돌아가기</button>
+      <button type="button" class="btn-return btn btn-primary" @click="$router.push('/')">메인페이지로 돌아가기</button>
     </div>
 
   </div>
@@ -74,5 +74,23 @@ export default {
 .days {
   width: 350px;
   margin-bottom: 70px;
+}
+
+.register-btn {
+  font-size: 18px;
+}
+
+@media(max-width: 480px) {
+  .email {
+    width: 300px;
+  }
+
+  .days {
+    width: 300px;
+  }
+
+  .register-btn {
+    font-size: 15px;
+  }
 }
 </style>
