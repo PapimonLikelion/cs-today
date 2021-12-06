@@ -53,6 +53,10 @@ export default {
 }
 
 @media(max-width: 480px) {
+  .main {
+    height: 100%;
+  }
+
   .title {
     margin-top: 100px;
     font-size: 25px;
