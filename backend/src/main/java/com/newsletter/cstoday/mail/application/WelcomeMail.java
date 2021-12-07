@@ -1,6 +1,7 @@
 package com.newsletter.cstoday.mail.application;
 
 public class WelcomeMail {
+
     public static String welcomeMailContent;
 
     static {

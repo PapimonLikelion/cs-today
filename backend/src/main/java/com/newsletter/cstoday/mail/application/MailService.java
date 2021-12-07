@@ -49,7 +49,7 @@ public class MailService {
             mimeMessageHelper.setText(text, true);
             return mimeMessage;
         } catch (MessagingException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException("MimeMessage 메일을 만드는 과정에서 오류가 발생했습니다.");
         }
     }
 }

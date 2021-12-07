@@ -1,6 +1,6 @@
 package com.newsletter.cstoday.slack.application;
 
-import com.newsletter.cstoday.slack.application.event.SlackMessageEvent;
+import com.newsletter.cstoday.slack.application.event.SlackJoinEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -22,9 +22,9 @@ public class SlackService {
 
     @Async
     @TransactionalEventListener
-    public void sendSlackMessage(SlackMessageEvent slackMessageEvent) {
+    public void sendSlackJoinMessage(SlackJoinEvent slackJoinEvent) {
         Map<String, String> body = new HashMap<>();
-        body.put("text", slackMessageEvent.getMessage());
+        body.put("text", slackJoinEvent.getMessage());
         restTemplate.postForObject(slackUrl, body, String.class);
     }
 }

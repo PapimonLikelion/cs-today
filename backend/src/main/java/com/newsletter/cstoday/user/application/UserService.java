@@ -4,7 +4,7 @@ import com.newsletter.cstoday.content.domain.Content;
 import com.newsletter.cstoday.content.domain.repository.ContentRepository;
 import com.newsletter.cstoday.mail.application.event.NewsLetterMailEvent;
 import com.newsletter.cstoday.mail.application.event.WelcomeMailEvent;
-import com.newsletter.cstoday.slack.application.event.SlackMessageEvent;
+import com.newsletter.cstoday.slack.application.event.SlackJoinEvent;
 import com.newsletter.cstoday.user.domain.User;
 import com.newsletter.cstoday.user.domain.repository.UserRepository;
 import com.newsletter.cstoday.user.ui.dto.UserDto;
@@ -33,7 +33,7 @@ public class UserService {
         final User user = new User(userDto.getEmail(), userDto.getMailInterval());
         userRepository.save(user);
         eventPublisher.publishEvent(new WelcomeMailEvent(user.getEmail()));
-        eventPublisher.publishEvent(SlackMessageEvent.ofNewSubscription(user.getEmail(), user.getMailInterval()));
+        eventPublisher.publishEvent(SlackJoinEvent.ofNewSubscription(user.getEmail(), user.getMailInterval()));
     }
 
     @Scheduled(cron = "0 0 8 * * ?")

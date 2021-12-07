@@ -2,6 +2,7 @@ package com.newsletter.cstoday.content.application;
 
 import com.newsletter.cstoday.content.domain.Content;
 import com.newsletter.cstoday.content.domain.repository.ContentRepository;
+import com.newsletter.cstoday.exception.CsTodayException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class ContentService {
         if (this.password.equals(password)) {
             return uploadNewsLetterToServer(newsLetterFile);
         }
-        throw new IllegalArgumentException();
+        throw new CsTodayException("비밀번호가 잘못되었습니다.");
     }
 
     private Long uploadNewsLetterToServer(MultipartFile newsLetterFile) {
@@ -32,7 +33,7 @@ public class ContentService {
 
     public String getContentText(Long contentId) {
         final Content content = contentRepository.findById(contentId)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new CsTodayException("찾을 수 없는 contentId 입니다."));
         return content.getText();
     }
 }

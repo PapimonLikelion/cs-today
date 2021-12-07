@@ -18,7 +18,7 @@ public class MultipartFileConverter {
             final String newsLetterText = IOUtils.toString(stream, StandardCharsets.UTF_8);
             return new Content(newsLetterText);
         } catch (IOException exception) {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException("MultipartFile을 String으로 변환하지 못했습니다.");
         }
     }
 }

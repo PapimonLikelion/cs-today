@@ -3,7 +3,7 @@ package com.newsletter.cstoday.user.application;
 import com.newsletter.cstoday.mail.application.MailService;
 import com.newsletter.cstoday.mail.application.event.WelcomeMailEvent;
 import com.newsletter.cstoday.slack.application.SlackService;
-import com.newsletter.cstoday.slack.application.event.SlackMessageEvent;
+import com.newsletter.cstoday.slack.application.event.SlackJoinEvent;
 import com.newsletter.cstoday.user.domain.User;
 import com.newsletter.cstoday.user.domain.repository.UserRepository;
 import com.newsletter.cstoday.user.ui.dto.UserDto;
@@ -38,7 +38,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        doNothing().when(slackService).sendSlackMessage(isA(SlackMessageEvent.class));
+        doNothing().when(slackService).sendSlackJoinMessage(isA(SlackJoinEvent.class));
         doNothing().when(mailService).sendWelcomeMail(isA(WelcomeMailEvent.class));
     }
 
@@ -51,7 +51,7 @@ class UserServiceTest {
         assertThat(user.getEmail()).isEqualTo(email);
         assertThat(user.getMailInterval()).isEqualTo(mailInterval);
 
-        verify(slackService, times(1)).sendSlackMessage(any());
+        verify(slackService, times(1)).sendSlackJoinMessage(any());
         verify(mailService, times(1)).sendWelcomeMail(any());
     }
 }

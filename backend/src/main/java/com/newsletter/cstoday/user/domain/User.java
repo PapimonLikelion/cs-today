@@ -38,7 +38,7 @@ public class User {
 
     public void mailSent() {
         if (datePassedFromLastMail != mailInterval) {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException("메일을 보내야하는 날이 아닙니다.");
         }
         datePassedFromLastMail = 1;
         contentId++;
@@ -46,7 +46,7 @@ public class User {
 
     public void dayPast() {
         if (datePassedFromLastMail >= mailInterval) {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException("메일을 보냈어야하는 날에 보내지 않고 DayPast가 되었습니다.");
         }
         datePassedFromLastMail++;
     }
