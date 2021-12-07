@@ -2,6 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    show-sql: true
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
@@ -10,8 +11,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: test
-    password: test
+      username: test
+      password: test
     properties:
       mail:
         smtp:
@@ -24,3 +25,11 @@ setting:
     password: test
 slack:
   url: test
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

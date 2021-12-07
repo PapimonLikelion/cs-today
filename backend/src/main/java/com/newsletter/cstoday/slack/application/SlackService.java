@@ -1,8 +1,11 @@
 package com.newsletter.cstoday.slack.application;
 
+import com.newsletter.cstoday.slack.application.event.SlackMessageEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -17,9 +20,11 @@ public class SlackService {
     @Value("${slack.url}")
     private String slackUrl;
 
-    public void sendSlackMessage(String message) {
+    @Async
+    @TransactionalEventListener
+    public void sendSlackMessage(SlackMessageEvent slackMessageEvent) {
         Map<String, String> body = new HashMap<>();
-        body.put("text", message);
+        body.put("text", slackMessageEvent.getMessage());
         restTemplate.postForObject(slackUrl, body, String.class);
     }
 }
