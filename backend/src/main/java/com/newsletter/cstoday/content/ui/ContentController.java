@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URI;
-
 @Controller
 @RequiredArgsConstructor
 public class ContentController {
@@ -24,13 +22,13 @@ public class ContentController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<Void> uploadNewsLetter(@RequestParam("file") MultipartFile newsLetterFile,
-                                                 @RequestParam String password) {
-        final Long uploadedNewsLetterId = contentService.uploadNewsLetter(newsLetterFile, password);
-        return ResponseEntity.created(URI.create("content/" + uploadedNewsLetterId)).build();
+    public String uploadNewsLetter(@RequestParam("file") MultipartFile newsLetterFile,
+                                   @RequestParam String password) {
+        final Long contentId = contentService.uploadNewsLetter(newsLetterFile, password);
+        return "redirect:/contents/" + contentId;
     }
 
-    @GetMapping(value = "/content/{contentId:[\\d]+}", produces = "text/html")
+    @GetMapping(value = "/contents/{contentId:[\\d]+}", produces = "text/html")
     public ResponseEntity<String> getContent(@PathVariable Long contentId) {
         final String contentText = contentService.getContentText(contentId);
         return ResponseEntity.ok().body(contentText);
