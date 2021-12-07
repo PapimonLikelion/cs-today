@@ -32,7 +32,7 @@ public class User {
         this.contentId = 1L;
     }
 
-    public boolean checkMailSend() {
+    public boolean isMailSendDay() {
         return (datePassedFromLastMail == mailInterval);
     }
 

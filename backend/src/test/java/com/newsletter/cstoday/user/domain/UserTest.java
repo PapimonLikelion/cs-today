@@ -34,7 +34,7 @@ class UserTest {
     @DisplayName("유저의 datePassedFromLastMail이 mailInterval와 같다면, checkMailSend가 true이다.")
     @Test
     void checkMailSend() {
-        assertThat(user.checkMailSend()).isTrue();
+        assertThat(user.isMailSendDay()).isTrue();
     }
 
     @DisplayName("유저의 mailSent 메서드는 datePassedFromLastMail을 1로 만든다.")
