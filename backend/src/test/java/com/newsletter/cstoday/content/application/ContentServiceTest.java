@@ -15,6 +15,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 class ContentServiceTest {
@@ -45,5 +46,39 @@ class ContentServiceTest {
         // then
         final Content content = contentRepository.findById(id).get();
         assertThat(content.getText()).isEqualTo(newsLetterText);
+    }
+
+    @DisplayName("비밀번호가 틀렸다면, 뉴스레터를 업로드할 수 없다.")
+    @Test
+    void uploadFailWhenPasswordWrong() throws IOException {
+        // given
+        File originalFile = new File(new File("").getAbsolutePath() + FILE_PATH + TEST_HTML);
+        FileInputStream fileInputStream = new FileInputStream(originalFile);
+        MultipartFile multipartFile = new MockMultipartFile("test.html", originalFile.getName(), "text/html", IOUtils.toByteArray(fileInputStream));
+
+        // then
+        assertThatThrownBy(() -> contentService.uploadNewsLetter(multipartFile, "wrongPW"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("contentId에 해당하는 뉴스레터의 text를 가져올 수 있다.")
+    @Test
+    void getContextTest() {
+        // given
+        final Content savedContent = contentRepository.save(new Content("hello world"));
+
+        // when
+        final String contentText = contentService.getContentText(savedContent.getId());
+
+        // then
+        assertThat(contentText).isEqualTo("hello world");
+    }
+
+
+    @DisplayName("contentId에 해당하는 뉴스레터가 없다면 예외가 발생한다.")
+    @Test
+    void cannotGetContextTest() {
+        assertThatThrownBy(() -> contentService.getContentText(99999999L))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
