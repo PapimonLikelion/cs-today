@@ -22,3 +22,5 @@ spring:
 setting:
   upload:
     password: test
+slack:
+  url: test
