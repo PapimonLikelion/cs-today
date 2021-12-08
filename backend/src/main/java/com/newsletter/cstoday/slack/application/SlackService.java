@@ -1,8 +1,10 @@
 package com.newsletter.cstoday.slack.application;
 
 import com.newsletter.cstoday.slack.application.event.SlackJoinEvent;
+import com.newsletter.cstoday.slack.application.event.SlackMailEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -23,8 +25,17 @@ public class SlackService {
     @Async
     @TransactionalEventListener
     public void sendSlackJoinMessage(SlackJoinEvent slackJoinEvent) {
+        sendSlackMessage(slackJoinEvent.getMessage());
+    }
+
+    @EventListener
+    public void sendSlackMailMessage(SlackMailEvent slackMailEvent) {
+        sendSlackMessage(slackMailEvent.getMessage());
+    }
+
+    private void sendSlackMessage(String message) {
         Map<String, String> body = new HashMap<>();
-        body.put("text", slackJoinEvent.getMessage());
+        body.put("text", message);
         restTemplate.postForObject(slackUrl, body, String.class);
     }
 }
