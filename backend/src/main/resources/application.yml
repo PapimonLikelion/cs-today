@@ -1,4 +1,14 @@
 spring:
+  profiles:
+    active: local
+    group:
+      local: console-logging
+      prod: console-logging, real-db, real-mail, real-logging, real-setting, file-error-logging, file-info-logging, slack-error-logging
+---
+spring:
+  config:
+    activate:
+      on-profile: local
   jpa:
     hibernate:
       ddl-auto: create
@@ -20,12 +30,10 @@ spring:
           timeout: 5000
           starttls:
             enable: true
-setting:
-  upload:
-    password: test
-slack:
-  url: test
 logging:
+  slack:
+    webhook-uri: test
+  config: classpath:logback-spring.xml
   level:
     org:
       hibernate:
@@ -33,3 +41,15 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+setting:
+  upload:
+    password: test
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true

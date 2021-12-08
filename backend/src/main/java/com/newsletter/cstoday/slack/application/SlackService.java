@@ -17,7 +17,7 @@ public class SlackService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${slack.url}")
+    @Value("${logging.slack.webhook-uri}")
     private String slackUrl;
 
     @Async

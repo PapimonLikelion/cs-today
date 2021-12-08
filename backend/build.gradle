@@ -35,6 +35,9 @@ dependencies {
 
     //Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Slack Logging
+    implementation 'com.github.maricn:logback-slack-appender:1.4.0'
 }
 
 test {
