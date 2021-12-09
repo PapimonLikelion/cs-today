@@ -14,7 +14,7 @@ public class SlackJoinEvent {
     public static SlackJoinEvent ofNewSubscription(Long userId, String email, int mailInterval) {
         return new SlackJoinEvent(
                 "### 신규 가입 ###\n" +
-                "ID : " + userId + ", Email : " + email + "-" + mailInterval + "일 간격\n"
+                "ID : " + userId + ", Email : " + email + ", 간격 : " + mailInterval + "\n"
         );
     }
 }

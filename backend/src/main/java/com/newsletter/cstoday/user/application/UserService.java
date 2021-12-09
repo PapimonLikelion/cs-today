@@ -39,7 +39,7 @@ public class UserService {
     @Scheduled(cron = "0 0 8 * * ?")
     @Transactional
     public void sendActiveUserNewsLetter() {
-        log.info("### Newsletter mail started -- " + LocalDateTime.now().toString() + "\n");
+        log.info("### Newsletter mail started -- " + LocalDateTime.now().toString());
         final List<User> activeUsers = userRepository.findAllByActive(true);
         for (User user : activeUsers) {
             checkIsMailSendDay(user);

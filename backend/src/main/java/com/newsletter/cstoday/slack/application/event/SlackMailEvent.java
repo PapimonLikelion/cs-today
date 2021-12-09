@@ -12,10 +12,13 @@ public class SlackMailEvent {
     }
 
     public static SlackMailEvent ofWelcome(String email) {
-        return new SlackMailEvent(email + " -- 웰컴 메일 전송");
+        return new SlackMailEvent("웰컴 메일 전송 - " + email);
     }
 
-    public static SlackMailEvent ofNewsLetter(String email) {
-        return new SlackMailEvent(email + " -- 뉴스레터 메일 전송");
+    public static SlackMailEvent ofNewsLetter(Long userId, String email) {
+        return new SlackMailEvent(
+                "### 뉴스레터 메일 전송 ###\n" +
+                "ID : " + userId + ", Email : " + email + "\n"
+        );
     }
 }

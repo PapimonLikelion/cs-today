@@ -30,6 +30,6 @@ public class MailService {
     @EventListener
     public void sendNewsLetter(NewsLetterMailEvent newsLetterMailEvent) {
         mailSender.sendMail(newsLetterMailEvent.getUserId(), newsLetterMailEvent.getEmail(), NEWSLETTER_SUBJECT, newsLetterMailEvent.getText());
-        eventPublisher.publishEvent(SlackMailEvent.ofNewsLetter(newsLetterMailEvent.getEmail()));
+        eventPublisher.publishEvent(SlackMailEvent.ofNewsLetter(newsLetterMailEvent.getUserId(), newsLetterMailEvent.getEmail()));
     }
 }
