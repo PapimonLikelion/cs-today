@@ -63,12 +63,6 @@ class MailServiceTest {
 
         final JavaMailSenderImpl mailSender3 = MailSenderManager.findMailSender(101L);
         assertThat(mailSender3.getUsername()).isEqualTo("test3");
-
-        final JavaMailSenderImpl mailSender4 = MailSenderManager.findMailSender(176L);
-        assertThat(mailSender4.getUsername()).isEqualTo("test4");
-
-        final JavaMailSenderImpl mailSender5 = MailSenderManager.findMailSender(250L);
-        assertThat(mailSender5.getUsername()).isEqualTo("test5");
     }
 
     @DisplayName("MailSenderManager가 지원할 수 없는 userId는 예외를 던진다.")

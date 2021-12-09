@@ -12,10 +12,6 @@ mail:
   pw2: test2
   user3: test3
   pw3: test3
-  user4: test4
-  pw4: test4
-  user5: test5
-  pw5: test5
 spring:
   config:
     activate:

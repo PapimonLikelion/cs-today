@@ -1,7 +1,6 @@
 package com.newsletter.cstoday.mail.application;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +12,7 @@ public enum MailSenderManager {
 
     FIRST_SENDER(1L, 50L),
     SECOND_SENDER(51L, 100L),
-    THIRD_SENDER(101L, 150L),
-    FOURTH_SENDER(151L, 200L),
-    FIFTH_SENDER(201L, 250L);
+    THIRD_SENDER(101L, 150L);
 
     MailSenderManager(Long userIdFrom, Long userIdTo) {
         this.userIdFrom = userIdFrom;
@@ -55,25 +52,11 @@ public enum MailSenderManager {
         @Value("${mail.pw3}")
         private String pw3;
 
-        @Value("${mail.user4}")
-        private String user4;
-
-        @Value("${mail.pw4}")
-        private String pw4;
-
-        @Value("${mail.user5}")
-        private String user5;
-
-        @Value("${mail.pw5}")
-        private String pw5;
-
         @PostConstruct
         private void inject() {
             FIRST_SENDER.mailSender = generateMailSender(user1, pw1);
             SECOND_SENDER.mailSender = generateMailSender(user2, pw2);
             THIRD_SENDER.mailSender = generateMailSender(user3, pw3);
-            FOURTH_SENDER.mailSender = generateMailSender(user4, pw4);
-            FIFTH_SENDER.mailSender = generateMailSender(user5, pw5);
         }
 
         private JavaMailSenderImpl generateMailSender(String username, String password) {
