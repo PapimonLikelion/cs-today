@@ -5,6 +5,17 @@ spring:
       local: console-logging
       prod: console-logging, real-db, real-mail, real-logging, real-setting, file-error-logging, file-info-logging, slack-error-logging
 ---
+mail:
+  user1: test1
+  pw1: test1
+  user2: test2
+  pw2: test2
+  user3: test3
+  pw3: test3
+  user4: test4
+  pw4: test4
+  user5: test5
+  pw5: test5
 spring:
   config:
     activate:
@@ -18,18 +29,6 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password:
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: test
-    password: test
-    properties:
-      mail:
-        smtp:
-          auth: true
-          timeout: 5000
-          starttls:
-            enable: true
 logging:
   slack:
     webhook-uri: test

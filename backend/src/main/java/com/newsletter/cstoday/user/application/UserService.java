@@ -32,14 +32,14 @@ public class UserService {
     public void register(UserDto userDto) {
         final User user = new User(userDto.getEmail(), userDto.getMailInterval());
         userRepository.save(user);
-        eventPublisher.publishEvent(new WelcomeMailEvent(user.getEmail()));
-        eventPublisher.publishEvent(SlackJoinEvent.ofNewSubscription(user.getEmail(), user.getMailInterval()));
+        eventPublisher.publishEvent(new WelcomeMailEvent(user.getId(), user.getEmail()));
+        eventPublisher.publishEvent(SlackJoinEvent.ofNewSubscription(user.getId(), user.getEmail(), user.getMailInterval()));
     }
 
     @Scheduled(cron = "0 0 8 * * ?")
     @Transactional
     public void sendActiveUserNewsLetter() {
-        log.info("Newsletter mail started -- " + LocalDateTime.now().toString());
+        log.info("### Newsletter mail started -- " + LocalDateTime.now().toString() + "\n");
         final List<User> activeUsers = userRepository.findAllByActive(true);
         for (User user : activeUsers) {
             checkIsMailSendDay(user);
@@ -58,7 +58,7 @@ public class UserService {
         final Optional<Content> content = contentRepository.findById(user.getContentId());
         if (content.isPresent()) {
             final Content todayContent = content.get();
-            eventPublisher.publishEvent(new NewsLetterMailEvent(user.getEmail(), todayContent.getText()));
+            eventPublisher.publishEvent(new NewsLetterMailEvent(user.getId(), user.getEmail(), todayContent.getText()));
             user.mailSent();
             return;
         }
