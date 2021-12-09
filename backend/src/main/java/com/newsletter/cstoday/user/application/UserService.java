@@ -2,6 +2,7 @@ package com.newsletter.cstoday.user.application;
 
 import com.newsletter.cstoday.content.domain.Content;
 import com.newsletter.cstoday.content.domain.repository.ContentRepository;
+import com.newsletter.cstoday.exception.CsTodayException;
 import com.newsletter.cstoday.mail.application.event.NewsLetterMailEvent;
 import com.newsletter.cstoday.mail.application.event.WelcomeMailEvent;
 import com.newsletter.cstoday.slack.application.event.SlackJoinEvent;
@@ -30,10 +31,18 @@ public class UserService {
 
     @Transactional
     public void register(UserDto userDto) {
+        validateUserDto(userDto);
         final User user = new User(userDto.getEmail(), userDto.getMailInterval());
         userRepository.save(user);
         eventPublisher.publishEvent(new WelcomeMailEvent(user.getId(), user.getEmail()));
         eventPublisher.publishEvent(SlackJoinEvent.ofNewSubscription(user.getId(), user.getEmail(), user.getMailInterval()));
+    }
+
+    private void validateUserDto(UserDto userDto) {
+        final Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
+        if (optionalUser.isPresent()) {
+            throw new CsTodayException("이미 등록된 사용자입니다.");
+        }
     }
 
     @Scheduled(cron = "0 0 8 * * ?")

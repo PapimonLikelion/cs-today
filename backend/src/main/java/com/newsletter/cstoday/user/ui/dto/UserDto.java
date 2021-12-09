@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Getter
 @Setter
@@ -13,9 +15,12 @@ public class UserDto {
 
     @Email(message = "Email should be valid")
     private String email;
-    private int mailInterval;
 
-    public UserDto(String email, int mailInterval) {
+    @Min(1)
+    @Max(7)
+    private Integer mailInterval;
+
+    public UserDto(String email, Integer mailInterval) {
         this.email = email;
         this.mailInterval = mailInterval;
     }
