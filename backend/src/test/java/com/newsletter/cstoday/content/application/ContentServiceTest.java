@@ -2,6 +2,7 @@ package com.newsletter.cstoday.content.application;
 
 import com.newsletter.cstoday.content.domain.Content;
 import com.newsletter.cstoday.content.domain.repository.ContentRepository;
+import com.newsletter.cstoday.exception.CsTodayException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +59,7 @@ class ContentServiceTest {
 
         // then
         assertThatThrownBy(() -> contentService.uploadNewsLetter(multipartFile, "wrongPW"))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CsTodayException.class);
     }
 
     @DisplayName("contentId에 해당하는 뉴스레터의 text를 가져올 수 있다.")
@@ -79,6 +80,6 @@ class ContentServiceTest {
     @Test
     void cannotGetContextTest() {
         assertThatThrownBy(() -> contentService.getContentText(99999999L))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CsTodayException.class);
     }
 }

@@ -50,7 +50,7 @@ class UserTest {
         user.mailSent();
         assertThat(user.getDatePassedFromLastMail()).isNotEqualTo(user.getMailInterval());
         assertThatThrownBy(() -> user.mailSent())
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @DisplayName("mail을 보내지 않으면 dayPast 메서드로 datePassedFromLastMail을 하루 올린다.")
@@ -65,7 +65,7 @@ class UserTest {
     @Test
     void dayPastLowerThanMailInterval() {
         assertThatThrownBy(() -> user.dayPast())
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @DisplayName("finishSubscription 메서드는 user의 active를 false로 만든다.")
