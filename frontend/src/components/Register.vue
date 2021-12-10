@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "register",
   data() {
@@ -49,7 +51,15 @@ export default {
         alert("올바르지 않은 이메일 주소입니다");
         return;
       }
-      this.register = true;
+      axios.post('https://cs-today.kro.kr/register', {
+        email : this.email,
+        mailInterval : this.days
+      }).then((result) => {
+        console.log(result);
+        this.register = true;
+      }).catch((error) => {
+        alert(error.response.data);
+      });
     },
     validEmail(){
       const regex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
