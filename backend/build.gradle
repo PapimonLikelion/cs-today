@@ -34,6 +34,9 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 
+    // flyway
+    implementation('org.flywaydb:flyway-core:6.4.2')
+
     //Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

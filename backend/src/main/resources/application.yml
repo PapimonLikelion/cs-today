@@ -25,6 +25,8 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password:
+  flyway:
+    enabled: false
 logging:
   slack:
     webhook-uri: test
@@ -48,6 +50,9 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 logging:
   file:
     path: /home/ubuntu/logs
