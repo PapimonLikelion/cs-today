@@ -2,7 +2,7 @@
   <div class="main">
     <h2 class="title"><a href="/">💻 오늘의 CS 💻</a></h2>
 
-    <div class="form" v-if="!register">
+    <div class="form" v-if="register == 'before'">
       <div class="email">
         <p class="text">1. 뉴스레터를 받아볼 이메일을 입력해주세요</p>
         <input type="email" v-model="email" class="form-control" placeholder="이메일을 입력해주세요">
@@ -20,11 +20,15 @@
           <option selected value="7">7일마다 받기</option>
         </select>
       </div>
-  
+
       <button type="button" class="btn btn-primary register-btn" @click="send()">오늘의 CS 구독하기 🎉</button>
     </div>
 
-    <div class="registerd" v-if="register">
+    <div v-if="register == 'loading'" class="loading-module">
+      <PulseLoader :color="'#0d6efd'"></PulseLoader>
+    </div>
+
+    <div class="registerd" v-if="register == 'after'">
       <h4 class="mb-4">🎉 감사합니다 🎉</h4>
       <p class="text">{{this.email}}로 {{this.days}}일마다 보내드릴게요!</p>
       <button type="button" class="btn-return btn btn-primary" @click="$router.push('/')">메인페이지로 돌아가기</button>
@@ -35,14 +39,18 @@
 
 <script>
 import axios from 'axios'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
   name: "register",
+  components : {
+    PulseLoader
+  },
   data() {
     return {
       email: "",
       days: "7",
-      register: false,
+      register: "before",
     }
   },
   methods: {
@@ -51,14 +59,16 @@ export default {
         alert("올바르지 않은 이메일 주소입니다");
         return;
       }
+      this.register = "loading",
       axios.post('https://cs-today.kro.kr/register', {
         email : this.email,
         mailInterval : this.days
       }).then((result) => {
         console.log(result);
-        this.register = true;
+        this.register = "after";
       }).catch((error) => {
-        alert(error.response.data);
+        alert(error);
+        this.register = "before";
       });
     },
     validEmail(){
@@ -90,6 +100,10 @@ export default {
   font-size: 18px;
 }
 
+.loading-module {
+  margin-top: 150px;
+}
+
 @media(max-width: 480px) {
   .email {
     width: 300px;
@@ -101,6 +115,10 @@ export default {
 
   .register-btn {
     font-size: 15px;
+  }
+  
+  .loading-module {
+    margin-top: 170px;
   }
 }
 </style>
