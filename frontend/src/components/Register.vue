@@ -67,7 +67,7 @@ export default {
         console.log(result);
         this.register = "after";
       }).catch((error) => {
-        alert(error);
+        alert(error.response.data);
         this.register = "before";
       });
     },
