@@ -81,5 +81,10 @@ export default {
   .btn-options button {
     font-size: 15px;
   }
+
+  .preview > a {
+    color: slategray !important;
+    font-size: 14px;
+  }
 }
 </style>
