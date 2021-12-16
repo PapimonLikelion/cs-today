@@ -14,12 +14,12 @@
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
                 <level>INFO</level>
             </filter>
-            <file>${LOG_PATH}/logs/nolto-info.log</file>
+            <file>${LOG_PATH}/logs/cstoday-info.log</file>
             <encoder>
                 <Pattern>%d{HH:mm:ss.SSS} [%-5level] [%thread] [%logger{36}] - %m%n</Pattern>
             </encoder>
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-                <fileNamePattern>${LOG_PATH}/logs/dateLog/%d{yyyy_MM_dd}_%i.nolto-info.log
+                <fileNamePattern>${LOG_PATH}/logs/dateLog/%d{yyyy_MM_dd}_%i.cstoday-info.log
                 </fileNamePattern>
                 <maxFileSize>50MB</maxFileSize>
                 <maxHistory>14</maxHistory>
@@ -33,12 +33,12 @@
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
                 <level>ERROR</level>
             </filter>
-            <file>${LOG_PATH}/logs/nolto-error.log</file>
+            <file>${LOG_PATH}/logs/cstoday-error.log</file>
             <encoder>
                 <Pattern>%d{HH:mm:ss.SSS} [%-5level] [%thread] [%logger{36}] - %m%n</Pattern>
             </encoder>
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-                <fileNamePattern>${LOG_PATH}/logs/dateLog/%d{yyyy_MM_dd}_%i.nolto-error.log
+                <fileNamePattern>${LOG_PATH}/logs/dateLog/%d{yyyy_MM_dd}_%i.cstoday-error.log
                 </fileNamePattern>
                 <maxFileSize>50MB</maxFileSize>
                 <maxHistory>14</maxHistory>

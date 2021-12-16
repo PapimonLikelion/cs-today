@@ -55,4 +55,4 @@ spring:
     baseline-on-migrate: true
 logging:
   file:
-    path: /home/ubuntu/logs
+    path: /home/ubuntu
