@@ -3,6 +3,9 @@
     <h2 class="title"><a href="/">💻 오늘의 CS 💻</a></h2>
     <p class="text">데이터 구조, 알고리즘, 운영체제, 네트워크 내용을</p>
     <p class="text">부담없는 하루 분량으로 뉴스레터를 보내드려요</p>
+    <div class="preview mt-5">
+      <a href="https://easy-deploy.kr/pages/cs-today-preview" target="_blank">첫 번째 뉴스레터 미리보기 >></a>
+    </div>
     <div class="btn-options">
       <button type="button" class="btn btn-primary register-btn" @click="$router.push('/register')">오늘의 CS 구독하기 🎉</button>
       <button type="button" class="btn btn-primary register-btn" @click="donation()">커피 한 잔 후원하기 ☕</button>
@@ -39,7 +42,7 @@ export default {
 }
 
 .btn-options {
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -50,6 +53,15 @@ export default {
   font-size: 18px;
   width: 200px;
   text-align: center;
+}
+
+.preview > a {
+  color: slategray !important;
+  font-size: 17px;
+}
+
+.preview > a:hover {
+  color: dimgray !important;
 }
 
 @media(max-width: 480px) {
