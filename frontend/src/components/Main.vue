@@ -84,7 +84,7 @@ export default {
 
   .preview > a {
     color: slategray !important;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 </style>
