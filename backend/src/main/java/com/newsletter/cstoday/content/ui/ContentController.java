@@ -23,8 +23,8 @@ public class ContentController {
 
     @PostMapping("/upload")
     public String uploadNewsLetter(@RequestParam("file") MultipartFile newsLetterFile,
-                                   @RequestParam String password) {
-        final Long contentId = contentService.uploadNewsLetter(newsLetterFile, password);
+                                   @RequestParam String number) {
+        final Long contentId = contentService.uploadNewsLetter(newsLetterFile, number);
         return "redirect:/contents/" + contentId;
     }
 
