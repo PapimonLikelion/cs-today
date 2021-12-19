@@ -60,7 +60,7 @@ export default {
         return;
       }
       this.register = "loading",
-      axios.post('https://cs-today.kro.kr/register', {
+      axios.post('https://cstoday.me/register', {
         email : this.email,
         mailInterval : this.days
       }).then((result) => {
