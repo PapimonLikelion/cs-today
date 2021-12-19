@@ -17,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    @CrossOrigin(origins = "https://cs-today.netlify.app/", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://register.cstoday.me/", allowedHeaders = "*")
     public ResponseEntity<Void> register(@Validated @RequestBody UserDto userDto) {
         userService.register(userDto);
         return ResponseEntity.ok().build();
