@@ -5,13 +5,6 @@ spring:
       local: console-logging
       prod: console-logging, real-db, real-mail, real-logging, real-setting, file-error-logging, file-info-logging, slack-error-logging
 ---
-mail:
-  user1: test1
-  pw1: test1
-  user2: test2
-  pw2: test2
-  user3: test3
-  pw3: test3
 spring:
   config:
     activate:
@@ -27,6 +20,20 @@ spring:
     password:
   flyway:
     enabled: false
+  mail:
+    host: test.test.test
+    port: 465
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
 logging:
   slack:
     webhook-uri: test
