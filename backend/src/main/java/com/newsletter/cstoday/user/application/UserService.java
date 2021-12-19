@@ -73,4 +73,9 @@ public class UserService {
         }
         user.finishSubscription();
     }
+
+    @Transactional
+    public void deleteUserByEmail(String email) {
+        userRepository.deleteByEmail(email);
+    }
 }

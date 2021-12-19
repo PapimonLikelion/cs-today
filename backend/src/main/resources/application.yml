@@ -48,6 +48,8 @@ logging:
 setting:
   upload:
     password: test
+  email:
+    api-key: test
 ---
 spring:
   config:

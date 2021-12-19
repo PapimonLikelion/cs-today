@@ -3,6 +3,7 @@ package com.newsletter.cstoday.mail.application;
 import com.newsletter.cstoday.mail.application.event.NewsLetterMailEvent;
 import com.newsletter.cstoday.mail.application.event.WelcomeMailEvent;
 import com.newsletter.cstoday.slack.application.event.SlackMailEvent;
+import com.newsletter.cstoday.user.application.event.UserDeleteEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
@@ -23,12 +24,19 @@ public class MailService {
     private static final String NEWSLETTER_SUBJECT = "오늘의 CS 뉴스레터입니다 🎁";
     private static final String SERVER_MAIL_ADDRESS = "cstoday@cstoday.me";
 
+    private final MailValidationService mailValidationService;
     private final ApplicationEventPublisher eventPublisher;
     private final JavaMailSender mailSender;
 
     @Async
     @TransactionalEventListener
     public void sendWelcomeMail(WelcomeMailEvent welcomeMailEvent) {
+        final boolean mailValid = mailValidationService.checkValidMail(welcomeMailEvent.getEmail());
+        if (!mailValid) {
+            eventPublisher.publishEvent(new UserDeleteEvent(welcomeMailEvent.getEmail()));
+            return;
+        }
+
         final MimeMessage mimeMessage = createMimeMessage(welcomeMailEvent.getEmail(), WELCOME_MAIL_SUBJECT, WelcomeMail.welcomeMailContent);
         mailSender.send(mimeMessage);
         eventPublisher.publishEvent(SlackMailEvent.ofWelcome(welcomeMailEvent.getEmail()));
