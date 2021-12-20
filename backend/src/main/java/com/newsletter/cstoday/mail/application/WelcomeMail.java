@@ -190,7 +190,7 @@ public class WelcomeMail {
                 "    <p style=\"font-size: 14px; line-height: 170%;\"><span style=\"font-size: 16px; line-height: 27.2px;\">오늘의 CS를 구독해주셔서 감사합니다!!</span></p>\n" +
                 "<p style=\"font-size: 14px; line-height: 170%;\">&nbsp;</p>\n" +
                 "<p style=\"font-size: 14px; line-height: 170%;\"><span style=\"font-size: 16px; line-height: 27.2px;\">오늘의 CS 뉴스레터는 신청해주신 날짜 간격에 맞춰 아침 8시 전후로 보내드려요. </span></p>\n" +
-                "<p style=\"font-size: 14px; line-height: 170%;\"><span style=\"font-size: 16px; line-height: 27.2px;\">기타 문의 사항이 있으시다면, 해당 메일 주소로 문의해주시면 됩니다 :)</span></p>\n" +
+                "<p style=\"font-size: 14px; line-height: 170%;\"><span style=\"font-size: 16px; line-height: 27.2px;\">기타 문의 사항이 있으시다면, 해당 메일 주소로 문의해주세요. \uD83D\uDE01\uD83D\uDE01</span></p>\n" +
                 "<p style=\"font-size: 14px; line-height: 170%;\">&nbsp;</p>\n" +
                 "<p style=\"font-size: 14px; line-height: 170%;\"><span style=\"font-size: 16px; line-height: 27.2px;\">그러면 첫 번째 오늘의 CS 뉴스레터에서 만나요~ \uD83D\uDE4C\uD83D\uDE4C</span></p>\n" +
                 "<p style=\"font-size: 14px; line-height: 170%;\">&nbsp;</p>\n" +
