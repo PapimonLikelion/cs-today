@@ -35,15 +35,13 @@ class MailServiceTest {
     UserRepository userRepository;
 
     @MockBean
-    JavaMailSender mailSender;
+    MailSenderService mailSenderService;
 
     @MockBean
     SlackService slackService;
 
     @MockBean
     MailValidationService mailValidationService;
-
-    MimeMessage mockMimeMessage = new MimeMessage(Session.getInstance(new Properties()));
 
     String validEmail = "joel610@naver.com";
     String invalidEmail = "invalid@invalid.com";
@@ -53,10 +51,10 @@ class MailServiceTest {
         userRepository.save(new User(validEmail, 7));
         userRepository.save(new User(invalidEmail, 7));
 
-        doNothing().when(mailSender).send(isA(MimeMessage.class));
+        doNothing().when(mailSenderService).sendWelcomeMail(isA(String.class));
+        doNothing().when(mailSenderService).sendNewsLetter(isA(String.class), isA(String.class));
         doNothing().when(slackService).sendSlackMailMessage(isA(SlackMailEvent.class));
 
-        when(mailSender.createMimeMessage()).thenReturn(mockMimeMessage);
         when(mailValidationService.checkValidMail(validEmail)).thenReturn(true);
         when(mailValidationService.checkValidMail(invalidEmail)).thenReturn(false);
     }
@@ -70,7 +68,7 @@ class MailServiceTest {
     @Test
     void sendWelcomeMail() {
         mailService.sendWelcomeMail(new WelcomeMailEvent(1L, validEmail));
-        verify(mailSender, Mockito.timeout(1000).times(1)).send(isA(MimeMessage.class));
+        verify(mailSenderService, Mockito.timeout(1000).times(1)).sendWelcomeMail(isA(String.class));
         verify(slackService, Mockito.timeout(1000).times(1)).sendSlackMailMessage(any());
     }
 
@@ -82,7 +80,7 @@ class MailServiceTest {
         final Optional<User> deletedUser = userRepository.findByEmail(invalidEmail);
         assertThat(deletedUser).isEmpty();
 
-        verify(mailSender, Mockito.timeout(1000).times(0)).send(isA(MimeMessage.class));
+        verify(mailSenderService, Mockito.timeout(1000).times(0)).sendWelcomeMail(isA(String.class));
         verify(slackService, Mockito.timeout(1000).times(0)).sendSlackMailMessage(any());
     }
 
@@ -90,7 +88,7 @@ class MailServiceTest {
     @Test
     void sendNewsLetter() {
         mailService.sendNewsLetter(new NewsLetterMailEvent(1L, validEmail, "text"));
-        verify(mailSender, times(1)).send(isA(MimeMessage.class));
+        verify(mailSenderService, times(1)).sendNewsLetter(isA(String.class), isA(String.class));
         verify(slackService, times(1)).sendSlackMailMessage(any());
     }
 }

@@ -44,6 +44,10 @@ dependencies {
 
     //Slack Logging
     implementation 'com.github.maricn:logback-slack-appender:1.4.0'
+
+    //Mail
+    implementation group: 'org.simplejavamail', name: 'simple-java-mail', version: '6.6.1'
+    implementation group: 'org.simplejavamail', name: 'dkim-module', version: '6.6.1'
 }
 
 test {

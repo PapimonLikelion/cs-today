@@ -50,6 +50,7 @@ setting:
     password: test
   email:
     api-key: test
+  dkim: C:\\Users\\joel6\\Desktop\\오늘의 CS\\dkim.der
 ---
 spring:
   config:
