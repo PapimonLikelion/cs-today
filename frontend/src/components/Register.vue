@@ -21,7 +21,8 @@
         </select>
       </div>
 
-      <button type="button" class="btn btn-primary register-btn" @click="send()">오늘의 CS 구독하기 🎉</button>
+      <!-- <button type="button" class="btn btn-primary register-btn" @click="send()">오늘의 CS 구독하기 🎉</button> -->
+      <button type="button" class="btn btn-primary register-btn" @click="send()" disabled>1월 오픈 예정입니다 🎉</button>
     </div>
 
     <div v-if="register == 'loading'" class="loading-module">

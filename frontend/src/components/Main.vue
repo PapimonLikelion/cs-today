@@ -7,7 +7,8 @@
       <a href="https://easy-deploy.kr/pages/cs-today-preview" target="_blank">첫 번째 뉴스레터 미리보기 >></a>
     </div>
     <div class="btn-options">
-      <button type="button" class="btn btn-primary register-btn" @click="$router.push('/register')">오늘의 CS 구독하기 🎉</button>
+      <!-- <button type="button" class="btn btn-primary register-btn" @click="$router.push('/register')">오늘의 CS 구독하기 🎉</button> -->
+      <button type="button" class="btn btn-primary register-btn" @click="$router.push('/register')" disabled>1월 오픈 예정입니다 🎉</button>
       <button type="button" class="btn btn-primary register-btn" @click="donation()">커피 한 잔 후원하기 ☕</button>
     </div>
   </div>
