@@ -13,15 +13,8 @@ export default {
 
 <style>
 @font-face {
-  font-family: BMHANNAAir;
-  font-display: auto;
-  src: url('assets/fonts/BMHANNAAir_ttf.ttf') format('truetype');
-  font-weight: 500;
-}
-
-@font-face {
   font-family: BMHANNAPro;
-  font-display: auto;
+  font-display: fallback;
   src: url('assets/fonts/BMHANNAPro.ttf') format('truetype');
   font-weight: 500;
 }
