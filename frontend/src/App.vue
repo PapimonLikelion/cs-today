@@ -12,15 +12,15 @@ export default {
 </script>
 
 <style>
-@font-face {
+/* @font-face {
   font-family: BMHANNAPro;
   font-display: fallback;
   src: url('assets/fonts/BMHANNAPro.ttf') format('truetype');
   font-weight: 500;
-}
+} */
 
 #app {
-  font-family: BMHANNAPro;
+  font-family: 'Do Hyeon', sans-serif;
   text-align: center;
   display: flex;
   justify-content: center;
